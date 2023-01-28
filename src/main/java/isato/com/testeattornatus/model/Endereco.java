@@ -42,6 +42,7 @@ public class Endereco {
 
 
     @ManyToOne
+    @JoinColumn(name = "fk_pessoas_id")
     @JsonIgnoreProperties("enderecos")
     private Pessoa pessoa;
 

@@ -3,6 +3,7 @@ package isato.com.testeattornatus.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -12,12 +13,13 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Endereco(String logradouro, String cep, String numero, String cidade, Pessoa pessoa) {
+    public Endereco(String logradouro, String cep, String numero, String cidade, Boolean preferido, Pessoa pessoa) {
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
         this.pessoa = pessoa;
+        this.preferido = preferido;
     }
 
     @Id
@@ -40,12 +42,14 @@ public class Endereco {
     @Size(min = 3, max = 255)
     private String cidade;
 
+    @NotNull
+    private Boolean preferido;
+
 
     @ManyToOne
     @JoinColumn(name = "fk_pessoas_id")
     @JsonIgnoreProperties("enderecos")
     private Pessoa pessoa;
-
 
     public Long getId() {
         return id;
@@ -85,6 +89,14 @@ public class Endereco {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public Boolean getPreferido() {
+        return preferido;
+    }
+
+    public void setPreferido(Boolean preferido) {
+        this.preferido = preferido;
     }
 
     public Pessoa getPessoa() {

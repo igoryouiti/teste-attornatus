@@ -1,10 +1,12 @@
 package isato.com.testeattornatus.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.Fetch;
 
 import java.util.Date;
 import java.util.List;
@@ -31,7 +33,7 @@ public class Pessoa {
     @Size(min = 3, max = 255)
     private String nome;
 
-    @NotBlank
+    @JsonFormat(pattern="yyyy/MM/dd")
     private Date dataNascimento;
 
     @OneToMany (mappedBy = "pessoa", cascade = CascadeType.REMOVE)

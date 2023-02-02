@@ -13,13 +13,13 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Endereco(String logradouro, String cep, String numero, String cidade, Boolean preferido, Pessoa pessoa) {
+    public Endereco(String logradouro, String cep, String numero, String cidade, Boolean principal, Pessoa pessoa) {
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
         this.pessoa = pessoa;
-        this.preferido = preferido;
+        this.principal = principal;
     }
 
     @Id
@@ -43,10 +43,10 @@ public class Endereco {
     private String cidade;
 
     @NotNull
-    private Boolean preferido;
+    private Boolean principal;
 
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "fk_pessoas_id")
     @JsonIgnoreProperties("enderecos")
     private Pessoa pessoa;
@@ -91,12 +91,12 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    public Boolean getPreferido() {
-        return preferido;
+    public Boolean getPrincipal() {
+        return principal;
     }
 
-    public void setPreferido(Boolean preferido) {
-        this.preferido = preferido;
+    public void setPrincipal(Boolean principal) {
+        this.principal = principal;
     }
 
     public Pessoa getPessoa() {

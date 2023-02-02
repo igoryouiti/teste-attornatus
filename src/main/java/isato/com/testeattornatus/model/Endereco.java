@@ -13,12 +13,30 @@ public class Endereco {
     public Endereco() {
     }
 
+    public Endereco(Long id, String logradouro, String cep, String numero, String cidade, Boolean principal, Pessoa pessoa) {
+        this.id = id;
+        this.logradouro = logradouro;
+        this.cep = cep;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.principal = principal;
+        this.pessoa = pessoa;
+    }
+
     public Endereco(String logradouro, String cep, String numero, String cidade, Boolean principal, Pessoa pessoa) {
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
         this.pessoa = pessoa;
+        this.principal = principal;
+    }
+
+    public Endereco(String logradouro, String cep, String numero, String cidade, Boolean principal) {
+        this.logradouro = logradouro;
+        this.cep = cep;
+        this.numero = numero;
+        this.cidade = cidade;
         this.principal = principal;
     }
 

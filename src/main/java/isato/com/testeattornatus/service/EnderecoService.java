@@ -21,6 +21,7 @@ public class EnderecoService {
             Optional<List<Endereco>> enderecos = (enderecoRepository.findAllEnderecoByPessoaId(endereco.getPessoa().getId()));
             enderecos.get().forEach(end -> {
                 if(end.getPrincipal() == true) {
+
                     end.setPrincipal(false);
                     enderecoRepository.save(end);
                 }

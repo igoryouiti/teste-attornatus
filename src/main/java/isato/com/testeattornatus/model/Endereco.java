@@ -64,7 +64,7 @@ public class Endereco {
     private Boolean principal;
 
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_pessoas_id")
     @JsonIgnoreProperties("enderecos")
     private Pessoa pessoa;

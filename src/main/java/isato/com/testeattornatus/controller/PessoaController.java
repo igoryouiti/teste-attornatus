@@ -68,18 +68,4 @@ public class PessoaController {
             .map(response -> ResponseEntity.ok(response))
             .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
-
-//    @PutMapping("/{id}/enderecos")
-//    public ResponseEntity<Endereco> put(@Valid @RequestBody Endereco endereco, @PathVariable Long id) {
-//
-//        Optional<Endereco> optEndereco = enderecoRepository.findById(endereco.getId());
-//
-//        if (optEndereco.get().getPessoa().getId() == id) {
-//            return optEndereco.map(response -> ResponseEntity.status(HttpStatus.OK)
-//                            .body(enderecoRepository.save(endereco)))
-//                    .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//    }
 }

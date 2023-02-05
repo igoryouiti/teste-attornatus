@@ -30,19 +30,21 @@ public class EnderecoRepositoryTest {
     void start(){
         enderecoRepository.deleteAll();
 
-        Pessoa pessoa = pessoaRepository.save(new Pessoa("Mariana", new Date("1994/05/12")));
-
-        enderecoRepository.save(new Endereco("Rua Joao", "69885410", "55", "Mogi das Cruzes", false));
-        enderecoRepository.save(new Endereco("Rua Kleber", "54789888", "7", "Mogi das Cruzes", false, pessoa));
-        enderecoRepository.save(new Endereco("Rua Gloria", "58749856", "12", "Mogi das Cruzes", true, pessoa));
-        enderecoRepository.save(new Endereco("Rua Maria", "65201478", "57", "Mogi das Cruzes", false, pessoa));
     }
 
     @Test
     @DisplayName("Return 3 Endereco")
     public void mustReturnAllEnderecoFromPessoa(){
 
-        List<Endereco> enderecos = enderecoRepository.findAllEnderecoByPessoaId(1L).get();
+
+        Pessoa pessoa = pessoaRepository.save(new Pessoa("Mariana", new Date("1994/05/12")));
+
+        enderecoRepository.save(new Endereco("Rua Joao", "69885410", "55", "Mogi das Cruzes", false));
+        enderecoRepository.save(new Endereco("Rua Kleber", "54789888", "7", "Mogi das Cruzes", false, pessoa));
+        enderecoRepository.save(new Endereco("Rua Gloria", "58749856", "12", "Mogi das Cruzes", true, pessoa));
+        enderecoRepository.save(new Endereco("Rua Maria", "65201478", "57", "Mogi das Cruzes", false, pessoa));
+
+        List<Endereco> enderecos = enderecoRepository.findAllEnderecoByPessoaId(pessoa.getId()).get();
 
         assertEquals(3, enderecos.size());
 
@@ -52,7 +54,15 @@ public class EnderecoRepositoryTest {
     @DisplayName("Return 1 Endereco principal == true from Pessoa")
     public void mustReturnEnderecoPrincipalFromPessoa(){
 
-        Endereco endereco = enderecoRepository.findEnderecoPrincipalByPessoa(1L).get();
+        Pessoa pessoa = pessoaRepository.save(new Pessoa("Marcia", new Date("1992/05/12")));
+
+        enderecoRepository.save(new Endereco("Rua Amarantes", "69885410", "55", "Mogi das Cruzes", false));
+        enderecoRepository.save(new Endereco("Rua Olímpiadas", "54789888", "7", "Mogi das Cruzes", false, pessoa));
+        enderecoRepository.save(new Endereco("Rua Gloria", "58749856", "12", "Mogi das Cruzes", true, pessoa));
+        enderecoRepository.save(new Endereco("Rua Attornatus", "65201478", "57", "Mogi das Cruzes", false, pessoa));
+
+
+        Endereco endereco = enderecoRepository.findEnderecoPrincipalByPessoa(pessoa.getId()).get();
 
         assertTrue(endereco.getPrincipal().equals(true));
 

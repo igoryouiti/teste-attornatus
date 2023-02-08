@@ -34,13 +34,6 @@ public class EnderecoServiceTest {
     void start(){
         enderecoRepository.deleteAll();
 
-        Pessoa pessoa = pessoaRepository.save(new Pessoa("Mariana", new Date("1994/05/12")));
-
-        enderecoRepository.save(new Endereco("Rua Gloria", "58749856", "12", "Mogi das Cruzes", false));
-        enderecoRepository.save(new Endereco("Rua Maria", "65201478", "57", "Mogi das Cruzes", false));
-
-
-        enderecoRepository.save(new Endereco("Rua Joao", "69885410", "55", "Mogi das Cruzes", true, pessoa));
 
     }
 
@@ -48,16 +41,19 @@ public class EnderecoServiceTest {
     @DisplayName("Trata Endereco preferido para ser único")
     public void pessoaHaveOnlyOneEnderecoPreferido(){
 
-        Optional<Pessoa> pessoa = pessoaRepository.findById(1L);
+        Pessoa pessoa = pessoaRepository.save(new Pessoa("Mariana", new Date("1994/05/12")));
+
+        enderecoRepository.save(new Endereco("Rua Joao", "69885410", "55", "Mogi das Cruzes", true, pessoa));
+
 
         Endereco savedEndereco = new Endereco(
                 "Rua Kleber", "54789888",
-                "7", "Mogi das Cruzes", true, pessoa.get()
+                "7", "Mogi das Cruzes", true, pessoa
         );
 
         enderecoService.createEndereco(savedEndereco);
 
-        Optional<Pessoa> updatedPessoaWithEndereco = pessoaRepository.findById(1L);
+        Optional<Pessoa> updatedPessoaWithEndereco = pessoaRepository.findById(pessoa.getId());
 
         Endereco endereco1 = updatedPessoaWithEndereco.get().getEnderecos().get(0);
         Endereco endereco2 = updatedPessoaWithEndereco.get().getEnderecos().get(1);
